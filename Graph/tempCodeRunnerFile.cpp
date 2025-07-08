@@ -1,0 +1,9 @@
+graph[0].psb({1,3});graph[0].psb({3,3});
+    graph[1].psb({0,5});graph[1].psb({2,1});graph[1].psb({3,7});
+    graph[2].psb({1,2});graph[2].psb({6,2});
+    graph[3].psb({0,4});graph[3].psb({4,1});
+    graph[4].psb({3,2});graph[4].psb({5,3});
+    graph[5].psb({4,3});graph[5].psb({6,3});
+    graph[6].psb({2,3});graph[6].psb({5,1});graph[6].psb({7,4});graph[6].psb({8,2});
+    graph[7].psb({6,5});graph[7].psb({8,1});
+    graph[8].psb({6,4});graph[8].psb({7,5});
