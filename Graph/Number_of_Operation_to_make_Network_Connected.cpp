@@ -45,39 +45,83 @@ ll mod_mul(ll a,ll b,ll m){a=a%m;b=b%m;return(((a*b)%m)+m)%m;}
 ll mod_sub(ll a,ll b,ll m){a=a%m;b=b%m;return((a-b+m)%m);}
 ll mod_div(ll a,ll b,ll m){a=a%m;b=b%m;return(mod_mul(a,mminvprime(b,m),m)+m)%m;}
 
-//given an starting non zero number and an array, you have to multiply array's element to that number to get to the final end number and if number gets bigger than 100000 then take mod of it
-
-const ll N = 2e5 + 5;
-ll n, source, destination;
-v(ll) arr;
-//this path array eventually marks every point as 1 if it comes in a particular path, basically used here for path detetction
-queue<p(ll,ll)> pq;//{number,steps}
-//stores ordering
-v(ll) dist(100000,1e9);//distance minimisation, it will remember the shortest path for every node at every time
-
 /*########### Extra Functions ###########*/
 
-void Dijkstra_Algorithm()
+class disjoint_set
 {
-    while(!pq.empty())
+    v(ll) parent;
+    v(ll) rank;
+    v(ll) size;
+    public:
+    disjoint_set(ll n)
     {
-        p(ll,ll) data = pq.front();
-        pq.pop();
-        for(auto item : arr)
+        parent.resize(n + 1);
+        rank.resize(n + 1);
+        size.resize(n + 1);
+        f1(i,0,n + 1,1)
         {
-            ll num = (data.F*item)%100000;
-            if(data.S + 1 < dist[num])
-            {
-                dist[num] = data.S + 1;
-                if(num == destination)
-                {
-                    return;
-                }
-                pq.push({num,data.S + 1});
-            }
+            parent[i] = i;
+            rank[i] = 0;
+            size[i] = 1;
         }
     }
-}
+    //constructor
+    ll find_ultimate_parent(ll node)
+    {
+        if(node == parent[node])
+        {
+            return node;
+        }
+        return (parent[node] = find_ultimate_parent(parent[node]));
+    }
+    //find ultimate parent of given node
+    void union_by_rank(ll first_vertex,ll second_vertex)
+    {
+        ll upfv = find_ultimate_parent(first_vertex);
+        ll upsv = find_ultimate_parent(second_vertex);
+        if(upfv == upsv)
+        {
+            return;
+        }
+        if(rank[upfv] < rank[upsv])
+        {
+            parent[upfv] = upsv;
+        }
+        elif(rank[upfv] > rank[upsv])
+        {
+            parent[upsv] = upfv;
+        }
+        elif(rank[upfv] == rank[upsv])
+        {
+            parent[upsv] = upfv;
+            rank[upfv]++;
+        }
+    }
+    void union_by_size(ll first_vertex,ll second_vertex)
+    {
+        ll upfv = find_ultimate_parent(first_vertex);
+        ll upsv = find_ultimate_parent(second_vertex);
+        if(upfv == upsv)
+        {
+            return;
+        }
+        if(size[upfv] < size[upsv])
+        {
+            parent[upfv] = upsv;
+            size[upsv] += size[upfv];
+        }
+        elif(size[upfv] > size[upsv])
+        {
+            parent[upsv] = upfv;
+            size[upfv] += size[upsv];
+        }
+        elif(size[upfv] == size[upsv])
+        {
+            parent[upsv] = upfv;
+            size[upfv] += size[upsv];
+        }
+    }
+};
 
 /*################ Code #################*/
 
@@ -85,21 +129,16 @@ TOXOTIS
 {
     Fast_IO
     //use before taking any input
-    cin>>n>>source>>destination;
-    f1(i,0,n,1)
+    d_ll(n)
+    d_ll(m)
+    vector<int> graph[n + 1];
+    for(int i = 0;i < m;i++)
     {
-        d_ll(var)
-        arr.push_back(var);
+        d_ll(U) d_ll(V)
+        graph[U].push_back(V);
+        graph[V].push_back(U);
     }
-    if(source == destination)
-    {
-        cout<<0<<endl;
-    }
-    else
-    {
-        dist[source] = 0;
-        pq.push({source,0});
-        Dijkstra_Algorithm();
-        cout<<dist[destination]<<endl;
-    }
+    //edges required = total number of components - 1
+    //total extra edges should be greater than or equal to edges required
+    //simple hai DS banate banate jb bhi parent same aaye it means wo already connected hai and then it means extra edges += 1 and also connected components bhi pata karna easy hai so simple check afterwards
 }
