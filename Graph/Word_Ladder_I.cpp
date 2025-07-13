@@ -1,57 +1,44 @@
-#include "template.hpp"
-ll n, m, source;
-string wstart, wend;
-const ll N = 2e5;
-set<string> words;
-vector<pair<ll,ll>> graph[N + 1];
-v(ll) visited(N + 1,0);
-v(ll) path(N + 1,0);
-v(ll) dist(N + 1,lMAX);
-v(ll) indegree(N + 1,0);
-queue<pair<string,ll>> q;
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
 
-/*########### Extra Functions ###########*/
-
-/*################ Code #################*/
-
-TOXOTIS
+class Solution
 {
-    // Fast_IO
-    cin>>n;
-    for(ll i = 0;i < n;i++)
+public:
+    int ladderLength(string wstart, string wend, vector<string>& wordsList)
     {
-        string var;
-        cin>>var;
-        words.insert(var);
-    }
-    cin>>wstart>>wend;
-    q.push({wstart,1});
-    words.erase(wstart);
-    ll min_dist = lMAX;
-    while(!q.empty())
-    {
-        string cur_word = q.front().first;
-        ll cur_dist = q.front().second;
-        q.pop();
-        min_dist = cur_dist;
-        if(cur_word == wend)
+        set<string> words(wordsList.begin(), wordsList.end());
+        if(words.find(wend) == words.end())
         {
-            break;
+            return 0;
         }
-        for(ll j = 0;j < cur_word.length();j++)
+        queue<pair<string,ll>> q;
+        q.push({wstart,1});
+        words.erase(wstart);
+        while(!q.empty())
         {
-            char initial = cur_word[j];
-            for(ll i = 0;i < 26;i++)
+            string cur_word = q.front().first;
+            ll cur_dist = q.front().second;
+            q.pop();
+            if(cur_word == wend)
             {
-                cur_word[j] = 'a' + i;
-                if(words.find(cur_word) != words.end())
-                {
-                    words.erase(cur_word);
-                    q.push({cur_word,cur_dist + 1});
-                }
+                return cur_dist;
             }
-            cur_word[j] = initial;
+            for(ll j = 0;j < cur_word.length();j++)
+            {
+                char initial = cur_word[j];
+                for(ll i = 0;i < 26;i++)
+                {
+                    cur_word[j] = 'a' + i;
+                    if(words.find(cur_word) != words.end())
+                    {
+                        words.erase(cur_word);
+                        q.push({cur_word,cur_dist + 1});
+                    }
+                }
+                cur_word[j] = initial;
+            }
         }
+        return 0;
     }
-    cout<<min_dist<<endl;
-}
+};

@@ -45,7 +45,8 @@ ll mod_mul(ll a,ll b,ll m){a=a%m;b=b%m;return(((a*b)%m)+m)%m;}
 ll mod_sub(ll a,ll b,ll m){a=a%m;b=b%m;return((a-b+m)%m);}
 ll mod_div(ll a,ll b,ll m){a=a%m;b=b%m;return(mod_mul(a,mminvprime(b,m),m)+m)%m;}
 
-//Strongly connected components are valid to directed graphs
+//Strongly connected components are components in which each and every node is reachable from other nodes
+//Strongly connected components are only valid for directed graphs
 //Step 1 : Sort all the edges according to finishing time
 //Step 2 : Reverse all the edges
 //Step 3 : Do a DFS
