@@ -6,7 +6,7 @@ using namespace std;
 class Solution
 {
 public:
-    int countSubstrings(string s)
+    int numberOfSubstrings(string s)
     {
         int n = s.length();
         int right = 0;
@@ -29,6 +29,7 @@ public:
                 c = right;
             }
             count += min({a,b,c}) + 1;
+            right++;
         }
         return count;
     }

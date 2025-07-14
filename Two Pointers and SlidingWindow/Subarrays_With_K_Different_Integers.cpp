@@ -4,23 +4,24 @@ using namespace std;
 class Solution
 {
 private:
-    int numSubarrayWithSumLessThanEqual(vector<int>& nums,int goal)
+    int numSubarrayWithFreqLessThanEqual(vector<int>& nums,int k)
     {
-        if(goal < 0)
+        if(k < 0)
         {
             return 0;
         }
         int n = nums.size();
         int left = 0;
         int right = 0;
-        int sum = 0;
+        unordered_map<int,int> freq;
+        int curFreq = 0;
         int count = 0;
         while(right < n)
         {
-            sum += nums[right]&1;
-            while(sum > goal)
+            freq[nums[right]]++;
+            while(freq.size() > k)
             {
-                sum -= nums[left]&1;
+                freq[nums[left]]--;
                 left++;
             }
             count += right - left + 1;
@@ -29,11 +30,11 @@ private:
         return count;
     }
 public:
-    int numberOfSubarrays(vector<int>& nums,int goal)
+    int subarraysWithKDistinct(vector<int>& nums,int k)
     {
         int n = nums.size();
-        int k = numSubarrayWithSumLessThanEqual(nums,goal);
-        int k_1 = numSubarrayWithSumLessThanEqual(nums,goal - 1);
-        return (k - k_1);
+        int l = numSubarrayWithFreqLessThanEqual(nums,k);
+        int r = numSubarrayWithFreqLessThanEqual(nums,k - 1);
+        return (l - r);
     }
 };
