@@ -19,6 +19,10 @@ public:
             while(freq.size() > 2)
             {
                 freq[fruits[left]]--;
+                if(freq[fruits[left]] == 0)
+                {
+                    freq.erase(fruits[left]);
+                }
                 curAmount--;
                 left++;
             }
