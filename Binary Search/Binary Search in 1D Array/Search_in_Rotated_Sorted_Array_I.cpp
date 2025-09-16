@@ -15,7 +15,7 @@ int custom_BS(vector<int>& nums, int low, int high, int target)
         else if(nums[low] <= nums[mid])
         {
             // mid is in left sorted part
-            if(target >- nums[low] && target < nums[mid])
+            if(target >= nums[low] && target < nums[mid])
             {
                 high = mid - 1;
             }
