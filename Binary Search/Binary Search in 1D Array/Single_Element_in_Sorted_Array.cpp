@@ -14,7 +14,7 @@ int singleNonDuplicate(vector<int>& nums)
         }
         else if(nums[mid] == nums[mid - 1])
         {
-            if((mid - 1 - low) % 2 == 0)\
+            if((mid - 1 - low) % 2 == 0)
             {
                 low = mid + 1;
             }
