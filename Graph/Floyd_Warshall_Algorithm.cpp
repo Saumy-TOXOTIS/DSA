@@ -61,17 +61,17 @@ bool negative_cycle = false;
 
 void Floyd_Warshall_Algorithm()
 {
-    f1(k,1,n + 1,1)
+    for(int k = 1;k <= n;k++)
     {
-        f1(i,1,n + 1,1)
+        for(int i = 1;i <= n;i++)
         {
-            f1(j,1,n + 1,1)
+            for(int j = 1;j <= n;j++)
             {
                 graph[i][j] = min(graph[i][j],graph[i][k] + graph[k][j]);
             }
         }
     }
-    f1(i,1,n + 1,1)
+    for(int i = 1;i <= n;i++)
     {
         if(graph[i][i] < 0)
         {

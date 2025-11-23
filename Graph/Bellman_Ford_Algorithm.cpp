@@ -1,13 +1,15 @@
-#include "template.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
 ll n, m, source, destination;
 const ll N = 2e5 + 1;
 vector<pair<ll,ll>> graph[N + 1];
-v(ll) visited(N + 1,0);
-v(ll) path(N + 1,0);
-v(ll) check(N + 1,0);
-v(ll) indegree(N + 1,0);
-v(ll) dist(N + 1,1e9);
-v(ll) parent(N + 1,0);
+vector<ll> visited(N + 1,0);
+vector<ll> path(N + 1,0);
+vector<ll> check(N + 1,0);
+vector<ll> indegree(N + 1,0);
+vector<ll> dist(N + 1,1e9);
+vector<ll> parent(N + 1,0);
 queue<ll> q;
 priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,greater<pair<ll,ll>>> pq; //{dist,node}
 set<pair<ll,ll>> s; //{dist,node}
@@ -23,27 +25,27 @@ Relaxation :
 
 if(dist[parent_node] + edge_weight < dist[child_node])
 {
-dist[child_node] = dist[parent_node] + edge_weight;
+    dist[child_node] = dist[parent_node] + edge_weight;
 }
 */
 
 /*################ Code #################*/
 
-TOXOTIS
+int main()
 {
-    // Fast_IO
     cin>>n>>m;
     vector<tuple<ll,ll,ll>> edges;
-    f1(i,0,m,1)
+    for(int i = 0;i < m;i++)
     {
-        d_ll(U) d_ll(V) d_ll(W)
+        ll U,V,W;
+        cin>>U>>V>>W;
         graph[U].push_back({V,W});
         edges.push_back({U,V,W});
     }
     cin>>source>>destination;
     dist[source] = 0;
     bool negative_cycle = false;
-    f1(i,0,n - 1,1)
+    for(int i = 1;i <= n - 1;i++)
     {
         for(auto item : edges)
         {

@@ -1,4 +1,7 @@
-#include "template.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
 ll n, m;
 const ll N = 2e5;
 vector<pair<ll,ll>> graph[N + 1];
@@ -82,14 +85,14 @@ class Disjoint_Set
 
 /*################ Code #################*/
 
-TOXOTIS
+int main()
 {
-    // Fast_IO
     cin>>n>>m;
     Disjoint_Set DS_rank(n), DS_size(n);
-    f1(i,0,m,1)
+    for(ll i = 0;i < m;i++)
     {
-        d_ll(U) d_ll(V) d_ll(W)
+        ll U, V, W;
+        cin >> U >> V >> W;
         graph[U].push_back({V,W});
         graph[V].push_back({U,W});
         DS_rank.union_by_rank(U,V);

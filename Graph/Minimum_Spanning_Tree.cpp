@@ -53,10 +53,10 @@ ll mod_div(ll a,ll b,ll m){a=a%m;b=b%m;return(mod_mul(a,mminvprime(b,m),m)+m)%m;
 
 const ll N = 2e5 + 5;
 ll n;
-v(p(ll,ll)) graph[N];//graph[i] = {j,wt}, means i and j has edge between them with weight wt
+vector<pair<ll,ll>> graph[N];//graph[i] = {j,wt}, means i and j has edge between them with weight wt
 ll visited[N] = {0};
-v(p(ll,ll)) MST;
-priority_queue<p(p(ll,ll),ll)> pq;//{weight , node , parent}
+vector<pair<ll,ll>> MST;
+priority_queue<pair<pair<ll,ll>,ll>, vector<pair<pair<ll,ll>,ll>>, greater<pair<pair<ll,ll>,ll>>> pq;//{weight , node , parent}
 ll sum_edge_weight = 0;
 
 /*########### Extra Functions ###########*/
@@ -65,7 +65,7 @@ void Prims_Algorithm()
 {
     while(!pq.empty())
     {
-        p(p(ll,ll),ll) data = pq.top();
+        pair<pair<ll,ll>,ll> data = pq.top();
         ll wt = data.F.F;
         ll node = data.F.S;
         ll parent = data.S;

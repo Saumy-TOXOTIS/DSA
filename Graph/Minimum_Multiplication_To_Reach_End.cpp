@@ -61,19 +61,19 @@ void Dijkstra_Algorithm()
 {
     while(!pq.empty())
     {
-        p(ll,ll) data = pq.front();
+        pair<ll,ll> data = pq.front();
         pq.pop();
         for(auto item : arr)
         {
-            ll num = (data.F*item)%100000;
-            if(data.S + 1 < dist[num])
+            ll num = (data.second*item)%100000;
+            if(data.first + 1 < dist[num])
             {
-                dist[num] = data.S + 1;
+                dist[num] = data.first + 1;
                 if(num == destination)
                 {
                     return;
                 }
-                pq.push({num,data.S + 1});
+                pq.push({data.first + 1,num});
             }
         }
     }
@@ -86,9 +86,10 @@ TOXOTIS
     Fast_IO
     //use before taking any input
     cin>>n>>source>>destination;
-    f1(i,0,n,1)
+    for(int i = 0;i < n;i++)
     {
-        d_ll(var)
+        ll var;
+        cin>>var;
         arr.push_back(var);
     }
     if(source == destination)
@@ -98,7 +99,7 @@ TOXOTIS
     else
     {
         dist[source] = 0;
-        pq.push({source,0});
+        pq.push({0,source});
         Dijkstra_Algorithm();
         cout<<dist[destination]<<endl;
     }

@@ -49,13 +49,13 @@ ll mod_div(ll a,ll b,ll m){a=a%m;b=b%m;return(mod_mul(a,mminvprime(b,m),m)+m)%m;
 
 const ll N = 2e5 + 5;
 ll n;
-v(ll) graph[N];
+vector<ll> graph[N];
 ll visited[N] = {0};
 ll path[N] = {0};
 ll indegree[N] = {0};
 //this path array eventually marks every point as 1 if it comes in a particular path, basically used here for path detetction
 queue<ll> ordering;
-v(ll) ans;
+vector<ll> ans;
 //stores ordering
 
 /*########### Extra Functions ###########*/
@@ -70,7 +70,7 @@ void BFS()
         for(auto item : graph[node])
         {
             indegree[item]--;
-            if(!indegree[item])
+            if(indegree[item] == 0)
             {
                 ordering.push(item);
             }
@@ -81,10 +81,8 @@ void BFS()
 
 /*################ Code #################*/
 
-TOXOTIS
+int main()
 {
-    Fast_IO
-    //use before taking any input
     cin>>n;
     graph[1].push_back(2);
     graph[2].push_back(3);
@@ -93,16 +91,16 @@ TOXOTIS
     graph[5].push_back(6);
     graph[7].push_back(5);
     graph[8].push_back(2);
-    f1(i,1,n + 1,1)
+    for(int i = 1; i <= n; i++)
     {
         for(auto item : graph[i])
         {
             indegree[item]++;
         }
     }
-    f1(i,1,n + 1,1)
+    for(int i = 1; i <= n; i++)
     {
-        if(!indegree[i])
+        if(indegree[i] == 0)
         {
             ordering.push(i);
         }
